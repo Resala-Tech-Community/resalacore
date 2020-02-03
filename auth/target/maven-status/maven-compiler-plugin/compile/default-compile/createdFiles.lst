@@ -1,0 +1,4 @@
+org/resala/auth/oauth2server/AuthorizationServerApplication.class
+org/resala/auth/oauth2server/config/SecurityConfig.class
+org/resala/auth/oauth2server/controller/UserController.class
+org/resala/auth/oauth2server/config/AuthServerConfig.class
