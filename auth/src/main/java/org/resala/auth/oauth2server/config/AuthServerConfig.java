@@ -29,6 +29,6 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 .authorizedGrantTypes("authorization_code")
                 .scopes("user_info")
                 .autoApprove(true)
-                .redirectUris("http://localhost:8080/login");
+                .redirectUris("http://localhost:8080/login", "http://localhost:8081/login");
     }
 }
