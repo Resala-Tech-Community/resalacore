@@ -17,7 +17,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public @Data class VolunteerEntity {
+public class VolunteerEntity {
 
     public VolunteerEntity() {
     }
