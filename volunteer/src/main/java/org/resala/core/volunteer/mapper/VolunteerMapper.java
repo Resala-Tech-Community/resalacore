@@ -4,12 +4,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import org.resala.core.volunteer.Dto.EditVolunteerDto;
+import org.resala.core.volunteer.Dto.RegistrationPostDTO;
 import org.resala.core.volunteer.entities.VolunteerEntity;
 
 @Mapper
 public interface VolunteerMapper {
 
     VolunteerMapper instance = Mappers.getMapper(VolunteerMapper.class);
+
+    VolunteerEntity toVolunteerEntitiy(RegistrationPostDTO dto);
 
     void updateVolunteerFromDto(VolunteerEntity entity, @MappingTarget EditVolunteerDto dto);
 }

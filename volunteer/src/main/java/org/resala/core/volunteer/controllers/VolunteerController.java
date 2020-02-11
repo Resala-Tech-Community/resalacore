@@ -3,7 +3,7 @@ package org.resala.core.volunteer.controllers;
 import org.resala.core.volunteer.Dto.EditVolunteerDto;
 import org.resala.core.volunteer.mapper.VolunteerMapper;
 import org.resala.core.volunteer.services.VolunteerService;
-import org.resala.core.volunteer.repository.GeneralRepository;
+//import org.resala.core.volunteer.repository.GeneralRepository;
 import org.resala.core.volunteer.entities.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,17 +24,17 @@ import java.util.Set;
 public class VolunteerController {
 
     private final VolunteerService volunteerService;
-    private final GeneralRepository<RegionEntity> regionEntityGeneralService;
+   /* private final GeneralRepository<RegionEntity> regionEntityGeneralService;
     private final GeneralRepository<NetworkTypeEntity> networkTypeEntityGeneralService;
     private final GeneralRepository<UniversitySpecializationEntity> universitySpecializationEntityService;
-    private final GeneralRepository<VolunteerTypeEntity> volunteerTypeEntityService;
+    private final GeneralRepository<VolunteerTypeEntity> volunteerTypeEntityService;*/
 
-    public VolunteerController(final VolunteerService service, GeneralRepository<RegionEntity> regionEntityGeneralService, GeneralRepository<NetworkTypeEntity> networkTypeEntityGeneralService, GeneralRepository<UniversitySpecializationEntity> universitySpecializationEntityService, GeneralRepository<VolunteerTypeEntity> volunteerTypeEntityService) {
+    public VolunteerController(final VolunteerService service /*GeneralRepository<RegionEntity> regionEntityGeneralService, GeneralRepository<NetworkTypeEntity> networkTypeEntityGeneralService, GeneralRepository<UniversitySpecializationEntity> universitySpecializationEntityService, GeneralRepository<VolunteerTypeEntity> volunteerTypeEntityService*/) {
         volunteerService = service;
-        this.regionEntityGeneralService = regionEntityGeneralService;
+     /*   this.regionEntityGeneralService = regionEntityGeneralService;
         this.networkTypeEntityGeneralService = networkTypeEntityGeneralService;
         this.universitySpecializationEntityService = universitySpecializationEntityService;
-        this.volunteerTypeEntityService = volunteerTypeEntityService;
+        this.volunteerTypeEntityService = volunteerTypeEntityService;*/
     }
 
     @GetMapping("all")

@@ -20,7 +20,7 @@ public class VolunteerService {
         return volunteerEntity;
     }
 
-    public  VolunteerEntity find(Long id){
+    public VolunteerEntity find(Long id) {
         return volunteerRepository.findById(id).orElse(null);
     }
 
@@ -29,23 +29,33 @@ public class VolunteerService {
     }
 
 
-
-    public  List<VolunteerEntity> GetByName(String name){
+    public List<VolunteerEntity> GetByName(String name) {
 
         return volunteerRepository.findByName(name.toLowerCase());
     }
+
     public VolunteerEntity getVolunteerById(final Long id) {
         return volunteerRepository.findById(id).orElse(null);
     }
 
-    public Boolean isVolunteerExist(String identificationNumber,String phone) {
+    public Boolean isVolunteerExist(String identificationNumber, String phone) {
 
-        return  volunteerRepository.findByIdOrPhone(identificationNumber,phone) != null ? true : false;
+        return volunteerRepository.findByIdOrPhone(identificationNumber, phone) != null ? true : false;
     }
 
-    public String findMaxCode(String firstSegment){
+    public String findMaxCode(String firstSegment) {
         Long code = volunteerRepository.findMaxCode(firstSegment);
-       return code == null ? "1": code.toString();
+        return code == null ? "1" : code.toString();
     }
+
+    public VolunteerEntity findByCode(final String code) {
+        return volunteerRepository.findByCode(code);
+    }
+
+    public VolunteerEntity findByPhoneNumber(final String phoneNumber) {
+        return volunteerRepository.findByPhoneNumber(phoneNumber);
+    }
+
+
 
 }

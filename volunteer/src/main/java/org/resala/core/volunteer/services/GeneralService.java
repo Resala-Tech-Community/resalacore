@@ -1,7 +1,8 @@
 /*
-package org.resala.core.services;
 
-import GeneralRepository;
+package org.resala.core.volunteer.services;
+
+import org.resala.core.volunteer.repository.GeneralRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,8 +10,8 @@ import java.util.List;
 @Service
 public class GeneralService<T> {
 
-    */
-/*private final GeneralRepository generalRepository;
+
+    private final GeneralRepository generalRepository;
 
     public GeneralService(final GeneralRepository xgeneralRepository) {
         generalRepository = xgeneralRepository;
@@ -26,7 +27,12 @@ public class GeneralService<T> {
 
     public Object getVolunteerById(final Long id) {
         return generalRepository.findById(id).get();
-    }*//*
+    }
+
+    public void saveVolunteerRegistrationCount(long branchId, long eventId) {
+        generalRepository.insertCountIntoSelectCount(branchId, eventId);
+    }
 
 }
+
 */

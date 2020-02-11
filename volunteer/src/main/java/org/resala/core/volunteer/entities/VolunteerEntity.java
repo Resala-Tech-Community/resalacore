@@ -47,9 +47,9 @@ public class VolunteerEntity {
     private String name;
     private String joinDate;
     private String notes;
+    private String eMail;
     @Size(max = 14, min = 14, message = "{identification Number invalid}")
     @Column(unique = true)
-    @NotEmpty(message = "Please enter identification Number")
     private String identificationNumber;
     private Boolean miniCamp;
     private Boolean tshirt;
@@ -68,6 +68,6 @@ public class VolunteerEntity {
     private VolunteerTypeEntity volunteerType;
 
     @ManyToOne
-    private  RegionEntity regionEntity;
+    private RegionEntity regionEntity;
 
 }
