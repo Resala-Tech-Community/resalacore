@@ -1,6 +1,7 @@
 package org.resala.auth.oauth2server.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -14,6 +15,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Value("${hostname}")
+    private String hostName;
+
     @Override
     public void configure(
             AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
@@ -23,13 +27,15 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        System.out.println("----------------------------hostname----------------------------");
+        System.out.println(hostName);
         clients.inMemory()
                 .withClient("SampleClientId")
                 .secret(passwordEncoder.encode("secret"))
                 .authorizedGrantTypes("authorization_code")
-                .scopes("user_info","read","write").
-                authorities("write","read")
+                .scopes("user_info", "read", "write").
+                authorities("write", "read")
                 .autoApprove(true)
-                .redirectUris("http://localhost:8080/login", "http://localhost:8081/login");
+                .redirectUris("http://" + hostName + ":8080/login", "http://" + hostName + ":8081/login");
     }
 }
