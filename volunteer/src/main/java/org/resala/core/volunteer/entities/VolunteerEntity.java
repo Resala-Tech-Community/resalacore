@@ -48,28 +48,25 @@ public class VolunteerEntity implements Serializable {
     private String name;
     private String joinDate;
     private String notes;
-    @Column(unique = true)
     private String eMail;
     @Size(max = 14, min = 14, message = "{identification Number invalid}")
-    @Column(unique = true)
     private String identificationNumber;
     private Boolean miniCamp;
     private Boolean tshirt;
     private GenderEnum gender;
-    @Column(unique = true)
     @NotEmpty(message = "Please enter Phone Number")
     private String phoneNumber;
     private String birthDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private NetworkTypeEntity networkType;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private UniversitySpecializationEntity UniversitySpecialization;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private VolunteerTypeEntity volunteerType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private RegionEntity regionEntity;
 
 }

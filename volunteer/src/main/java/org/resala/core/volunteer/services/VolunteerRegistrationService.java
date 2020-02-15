@@ -20,14 +20,15 @@ public class VolunteerRegistrationService {
     }
 
     public boolean isRegistered(long branchId, long eventId, Long volunteerId) {
-        return volunteerRegistrationRepository.existsById(new VolunteerRegistrationKey(2l, branchId, volunteerId));
+        return volunteerRegistrationRepository.existsById(new VolunteerRegistrationKey(eventId, branchId, volunteerId));
     }
 
     public void save(long branchId, long eventId, Long volunteerId) {
 
         VolunteerRegistrationEntity volunteerRegistrationEntity = new VolunteerRegistrationEntity(volunteerId, branchId, eventId);
         VolunteerRegistrationEntity entity = volunteerRegistrationRepository.save(volunteerRegistrationEntity);
-        afterSave(eventId, branchId);
+        long count = volunteerRegistrationRepository.countByBranchIdAndEventId(branchId, eventId);
+        afterSave(eventId, branchId, count);
     }
 
     public boolean validateAndSave(long branchId, long eventId, Long volunteerId) {
@@ -38,8 +39,8 @@ public class VolunteerRegistrationService {
         return true;
     }
 
-    private void afterSave(Long eventId, Long branchId) {
-        generalService.saveVolunteerRegistrationCount(branchId, eventId);
+    private void afterSave(Long eventId, Long branchId, long count) {
+        generalService.saveVolunteerRegistrationCount(branchId, eventId, count);
     }
 
 }

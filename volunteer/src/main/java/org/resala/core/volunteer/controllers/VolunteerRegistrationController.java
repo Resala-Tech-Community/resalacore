@@ -35,12 +35,12 @@ public class VolunteerRegistrationController {
         if (isValidCode(parms)) {
             return ResponseEntity.badRequest().build();
         }
-
         VolunteerEntity volunteerEntity = volunteerService.findByCode(parms.getCode());
         ResponseEntity invalidResponseEntity = getInvalidResponseEntity(parms, volunteerEntity);
         if (invalidResponseEntity != null) {
             return invalidResponseEntity;
         }
+
 
         volunteerRegistrationService.save(parms.getBranchId(), parms.getEventId(), volunteerEntity.getId());
         return ResponseEntity.ok().build();
@@ -72,7 +72,7 @@ public class VolunteerRegistrationController {
         VolunteerEntity entity = volunteerService.findAny(body.getPhoneNumber(), null, body.getEMail());
         if (null != entity) {
             boolean isSaved = volunteerRegistrationService.validateAndSave(body.getBranchId(), body.getEventId(), entity.getId());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Volunteer is already exist and registration is" + isSaved);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Volunteer is already exist and registration is " + isSaved);
         }
         VolunteerEntity volunteerEntity = VolunteerMapper.instance.toVolunteerEntitiy(body);
 

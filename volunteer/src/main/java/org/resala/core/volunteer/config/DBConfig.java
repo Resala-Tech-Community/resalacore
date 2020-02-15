@@ -13,7 +13,6 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "org.resala.core.volunteer.repository")
 public class DBConfig {
 
     @Autowired

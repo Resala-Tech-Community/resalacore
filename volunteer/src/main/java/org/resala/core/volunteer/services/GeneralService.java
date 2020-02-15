@@ -15,8 +15,14 @@ public class GeneralService<T, E> {
         generalRepository = xgeneralRepository;
     }
 
-    void saveVolunteerRegistrationCount(long branchId, long eventId) {
-        generalRepository.updateRegisterCount(branchId, eventId);
+    void saveVolunteerRegistrationCount(long branchId, long eventId, long count) {
+        System.out.println("-------------------saveVolunteerRegistrationCount----------------------------");
+        if (count > 1) {
+            generalRepository.updateRegisterCount(branchId, eventId, count);
+        } else {
+            generalRepository.insertRegisterCount(branchId, eventId, count);
+
+        }
     }
 
 }

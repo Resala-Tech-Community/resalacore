@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VolunteerRegistrationRepository extends CrudRepository<VolunteerRegistrationEntity, VolunteerRegistrationKey> {
 
+    long countByBranchIdAndEventId(long branchId, Long eventId);
 }
