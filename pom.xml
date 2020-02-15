@@ -16,7 +16,7 @@
     </parent>
     <groupId>org.resala</groupId>
     <artifactId>core</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1</version>
     <name>core</name>
     <description>Demo project for Spring Boot</description>
 
@@ -164,4 +164,11 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Resala-Tech-Community/resalacore</url>
+        </repository>
+    </distributionManagement>
 </project>
