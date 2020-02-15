@@ -2,6 +2,8 @@ package org.resala.core.volunteer.services;
 
 import org.resala.core.volunteer.entities.VolunteerEntity;
 import org.resala.core.volunteer.repository.VolunteerRepository;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,6 +58,23 @@ public class VolunteerService {
         return volunteerRepository.findByPhoneNumber(phoneNumber);
     }
 
+    public boolean isVolunteerExist(final String phoneNumber, final String idNumber, final String email) {
+        Example<VolunteerEntity> modelMatcher = getVolunteerEntityExample(phoneNumber, email);
 
+        return volunteerRepository.exists(modelMatcher);
+    }
+
+    public VolunteerEntity findAny(final String phoneNumber, final String idNumber, final String email) {
+        Example<VolunteerEntity> modelMatcher = getVolunteerEntityExample(phoneNumber, email);
+        List<VolunteerEntity> list = volunteerRepository.findAll(modelMatcher);
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    private Example<VolunteerEntity> getVolunteerEntityExample(String phoneNumber, String email) {
+        VolunteerEntity entity = new VolunteerEntity();
+        entity.setPhoneNumber(phoneNumber);
+        entity.setEMail(email);
+        return Example.of(entity, ExampleMatcher.matchingAny());
+    }
 
 }

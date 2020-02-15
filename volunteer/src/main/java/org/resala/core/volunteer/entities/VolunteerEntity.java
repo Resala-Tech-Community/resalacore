@@ -6,12 +6,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 
 @Entity
 @Getter
 @Setter
-public class VolunteerEntity {
+public class VolunteerEntity implements Serializable {
 
     public VolunteerEntity() {
     }
@@ -47,6 +48,7 @@ public class VolunteerEntity {
     private String name;
     private String joinDate;
     private String notes;
+    @Column(unique = true)
     private String eMail;
     @Size(max = 14, min = 14, message = "{identification Number invalid}")
     @Column(unique = true)

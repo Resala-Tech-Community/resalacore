@@ -9,7 +9,6 @@ import org.resala.core.volunteer.services.VolunteerService;
 import org.resala.core.volunteer.utils.ValidationUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,16 +65,18 @@ public class VolunteerRegistrationController {
 
     @PostMapping()
     public ResponseEntity RegisterVolunteer(RegistrationPostDTO body) {
-        Set<ConstraintViolation<RegistrationPostDTO>> viloations = ValidationUtils.getConstraintViolations(body);
-        if (!viloations.isEmpty()) {
-            return ResponseEntity.badRequest().body(viloations.stream().findFirst().get().getMessage());
+        Set<ConstraintViolation<RegistrationPostDTO>> violations = ValidationUtils.getConstraintViolations(body);
+        if (!violations.isEmpty()) {
+            return ResponseEntity.badRequest().body(violations.stream().findFirst().get().getMessage());
+        }
+        VolunteerEntity entity = volunteerService.findAny(body.getPhoneNumber(), null, body.getEMail());
+        if (null != entity) {
+            boolean isSaved = volunteerRegistrationService.validateAndSave(body.getBranchId(), body.getEventId(), entity.getId());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Volunteer is already exist and registration is" + isSaved);
         }
         VolunteerEntity volunteerEntity = VolunteerMapper.instance.toVolunteerEntitiy(body);
+
         volunteerService.saveData(volunteerEntity);
-        boolean isRegistered = volunteerRegistrationService.isRegistered(body.getBranchId(), body.getEventId(), volunteerEntity.getId());
-        if (isRegistered) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
         volunteerRegistrationService.save(body.getBranchId(), body.getEventId(), volunteerEntity.getId());
         return ResponseEntity.ok().build();
     }
