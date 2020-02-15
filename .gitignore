@@ -1,0 +1,11 @@
+/target/
+/volunteer/target/
+/auth/target/
+/auth/auth.iml
+/auth/resala.iml
+/auth/.idea/
+/.idea/
+/event/target/
+/volunteer/volunteer.iml
+/core.iml
+/volunteer/coredb
