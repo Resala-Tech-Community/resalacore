@@ -3,6 +3,8 @@ package org.resala.core.volunteer.entities;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.security.Timestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -16,8 +18,8 @@ public class VolunteerEntity {
     public VolunteerEntity() {
     }
 
-    public VolunteerEntity(String name, String joinDate, String notes, String identificationNumber,
-                           Boolean miniCamp, Boolean tshirt, GenderEnum gender, String phoneNumber, String birthDate,
+    public VolunteerEntity(String name, Timestamp joinDate, String notes, String identificationNumber,
+                           Boolean miniCamp, Boolean tshirt, GenderEnum gender, String phoneNumber, Timestamp birthDate,
                            Long networkTypeId, Long universitySpecializationId,
                            Long volunteerTypeId) {
 
@@ -45,7 +47,7 @@ public class VolunteerEntity {
     private String code;
     @NotEmpty(message = "Please enter Name")
     private String name;
-    private String joinDate;
+    private Timestamp joinDate;
     private String notes;
     private String eMail;
     @Size(max = 14, min = 14, message = "{identification Number invalid}")
@@ -57,7 +59,7 @@ public class VolunteerEntity {
     @Column(unique = true)
     @NotEmpty(message = "Please enter Phone Number")
     private String phoneNumber;
-    private String birthDate;
+    private Timestamp birthDate;
 
     @ManyToOne
     @JoinColumn

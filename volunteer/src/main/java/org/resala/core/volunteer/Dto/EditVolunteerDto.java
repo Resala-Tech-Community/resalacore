@@ -1,17 +1,19 @@
 package org.resala.core.volunteer.Dto;
 
+import java.security.Timestamp;
+
 import org.resala.core.volunteer.entities.GenderEnum;
 
 public class EditVolunteerDto {
     public String name;
-    public String joinDate;
+    public Timestamp joinDate;
     public String notes;
     public String identificationNumber;
     public Boolean miniCamp;
     public Boolean tshirt;
     public GenderEnum gender;
     public String phoneNumber;
-    public String birthDate;
+    public Timestamp birthDate;
     public Long networkTypeId;
     public Long universitySpecializationId;
     public Long volunteerTypeId;

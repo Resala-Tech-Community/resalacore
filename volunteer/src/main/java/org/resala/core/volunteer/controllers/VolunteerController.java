@@ -13,6 +13,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+
+import java.security.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -107,7 +109,7 @@ public class VolunteerController {
 
 //        check if all mandatory fields are add
         if (volunteerEntity.getRegionEntity() != null && volunteerEntity.getRegionEntity().getId() != 0) {
-            Date joinDate = geJointDate(volunteerEntity);
+            Timestamp joinDate = geJointDate(volunteerEntity);
             String codePatt = volunteerEntity.getGender().getValue() + new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH).format(joinDate);
             codePatt += volunteerService.findMaxCode(codePatt);
             volunteerEntity.setCode(codePatt);
@@ -172,10 +174,10 @@ public class VolunteerController {
         return networkTypeEntity;
     }
 
-    private Date geJointDate(@RequestBody VolunteerEntity volunteerEntity) throws ParseException {
-        Date joinDate = new Date();
-        if (!volunteerEntity.getJoinDate().isEmpty()) {
-            joinDate = new SimpleDateFormat("dd/MM/yyyy").parse(volunteerEntity.getJoinDate());
+    private Timestamp geJointDate(@RequestBody VolunteerEntity volunteerEntity) throws ParseException {
+        Timestamp joinDate =null;
+        if (volunteerEntity.getJoinDate() != null) {
+            joinDate = volunteerEntity.getJoinDate();
         }
         return joinDate;
     }

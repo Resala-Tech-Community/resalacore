@@ -1,0 +1,12 @@
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\config\SecurityConfig.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\services\GeneralService.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\config\SQLiteIdentityColumnSupport.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\config\DBConfig.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\config\Swagger2Config.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\controllers\EventController.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\config\SQLiteDialect.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\entities\EventEntity.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\repository\EventRepository.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\CoreApplication.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\dto\EventReqParamDto.java
+D:\Work\Resala\resalacore\event\src\main\java\org\resala\core\event\services\EventService.java

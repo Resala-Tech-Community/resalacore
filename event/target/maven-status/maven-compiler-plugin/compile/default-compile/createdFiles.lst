@@ -1,0 +1,11 @@
+org\resala\core\event\repository\EventRepository.class
+org\resala\core\event\config\SQLiteDialect.class
+org\resala\core\event\config\DBConfig.class
+org\resala\core\event\config\Swagger2Config.class
+org\resala\core\event\CoreApplication.class
+org\resala\core\event\config\SQLiteIdentityColumnSupport.class
+org\resala\core\event\entities\EventEntity.class
+org\resala\core\event\controllers\EventController.class
+org\resala\core\event\config\SecurityConfig.class
+org\resala\core\event\services\EventService.class
+org\resala\core\event\dto\EventReqParamDto.class
