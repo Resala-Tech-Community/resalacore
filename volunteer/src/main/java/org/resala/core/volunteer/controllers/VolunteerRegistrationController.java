@@ -1,5 +1,6 @@
 package org.resala.core.volunteer.controllers;
 
+import com.google.common.base.Strings;
 import org.resala.core.volunteer.Dto.RegistrationParamsDTO;
 import org.resala.core.volunteer.Dto.RegistrationPostDTO;
 import org.resala.core.volunteer.entities.VolunteerEntity;
@@ -32,32 +33,15 @@ public class VolunteerRegistrationController {
     @PostMapping("volunteer")
     public ResponseEntity RegisterVolunteerByCode(RegistrationParamsDTO parms) {
 
-        if (isValidCode(parms)) {
+        if (isValidParam(parms)) {
             return ResponseEntity.badRequest().build();
         }
-        VolunteerEntity volunteerEntity = volunteerService.findByCode(parms.getCode());
+        VolunteerEntity volunteerEntity = volunteerService.findByParams(parms);
         ResponseEntity invalidResponseEntity = getInvalidResponseEntity(parms, volunteerEntity);
         if (invalidResponseEntity != null) {
             return invalidResponseEntity;
         }
 
-
-        volunteerRegistrationService.save(parms.getBranchId(), parms.getEventId(), volunteerEntity.getId());
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("phone")
-    public ResponseEntity RegisterVolunteerByPhone(RegistrationParamsDTO parms) {
-
-        if (isValidPhone(parms)) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        VolunteerEntity volunteerEntity = volunteerService.findByPhoneNumber(parms.getPhone());
-        ResponseEntity invalidResponseEntity = getInvalidResponseEntity(parms, volunteerEntity);
-        if (invalidResponseEntity != null) {
-            return invalidResponseEntity;
-        }
 
         volunteerRegistrationService.save(parms.getBranchId(), parms.getEventId(), volunteerEntity.getId());
         return ResponseEntity.ok().build();
@@ -85,12 +69,8 @@ public class VolunteerRegistrationController {
         return Objects.isNull(parms) || Objects.isNull(parms.getBranchId()) || Objects.isNull(parms.getEventId());
     }
 
-    private boolean isValidCode(RegistrationParamsDTO parms) {
-        return isValidParams(parms) || Objects.isNull(parms.getCode());
-    }
-
-    private boolean isValidPhone(RegistrationParamsDTO parms) {
-        return isValidParams(parms) || Objects.isNull(parms.getPhone());
+    private boolean isValidParam(RegistrationParamsDTO parms) {
+        return isValidParams(parms) || (Strings.isNullOrEmpty(parms.getCode()) && Strings.isNullOrEmpty(parms.getPhone()));
     }
 
     private ResponseEntity getInvalidResponseEntity(RegistrationParamsDTO parms, VolunteerEntity volunteerEntity) {

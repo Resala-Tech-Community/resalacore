@@ -1,6 +1,8 @@
 package org.resala.core.volunteer.services;
 
+import org.resala.core.volunteer.Dto.RegistrationParamsDTO;
 import org.resala.core.volunteer.entities.VolunteerEntity;
+import org.resala.core.volunteer.mapper.VolunteerMapper;
 import org.resala.core.volunteer.repository.VolunteerRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -50,12 +52,10 @@ public class VolunteerService {
         return code == null ? "1" : code.toString();
     }
 
-    public VolunteerEntity findByCode(final String code) {
-        return volunteerRepository.findByCode(code);
-    }
-
-    public VolunteerEntity findByPhoneNumber(final String phoneNumber) {
-        return volunteerRepository.findByPhoneNumber(phoneNumber);
+    public VolunteerEntity findByParams(final RegistrationParamsDTO params) {
+        VolunteerEntity entity = VolunteerMapper.instance.toVolunteerEntity(params);
+        Example<VolunteerEntity> example = Example.of(entity, ExampleMatcher.matchingAny());
+        return findFirstByExample(example);
     }
 
     public boolean isVolunteerExist(final String phoneNumber, final String idNumber, final String email) {
@@ -66,8 +66,7 @@ public class VolunteerService {
 
     public VolunteerEntity findAny(final String phoneNumber, final String idNumber, final String email) {
         Example<VolunteerEntity> modelMatcher = getVolunteerEntityExample(phoneNumber, email);
-        List<VolunteerEntity> list = volunteerRepository.findAll(modelMatcher);
-        return list.isEmpty() ? null : list.get(0);
+        return findFirstByExample(modelMatcher);
     }
 
     private Example<VolunteerEntity> getVolunteerEntityExample(String phoneNumber, String email) {
@@ -77,4 +76,8 @@ public class VolunteerService {
         return Example.of(entity, ExampleMatcher.matchingAny());
     }
 
+    private VolunteerEntity findFirstByExample(final Example<VolunteerEntity> example) {
+        List<VolunteerEntity> list = volunteerRepository.findAll(example);
+        return list.isEmpty() ? null : list.get(0);
+    }
 }
