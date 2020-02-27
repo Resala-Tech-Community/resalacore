@@ -70,4 +70,11 @@ public class VolunteerEntity {
     @ManyToOne
     private  RegionEntity regionEntity;
 
+    public void setNetworkType(NetworkTypeEntity networkType) {
+        this.networkType = networkType;
+    }
+
+    public NetworkTypeEntity getNetworkType() {
+        return networkType;
+    }
 }

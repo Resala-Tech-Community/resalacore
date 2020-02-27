@@ -2,6 +2,7 @@ package org.resala.core.volunteer.config;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.identity.IdentityColumnSupport;
+import org.springframework.data.relational.core.dialect.Dialect;
 
 import java.sql.Types;
 

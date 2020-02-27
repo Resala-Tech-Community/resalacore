@@ -13,5 +13,7 @@ public  abstract class SimpleEntityParent {
     @Id
     private Long id;
     private String name;
+
+    public abstract void setId(Long networkTypeId);
 }
 

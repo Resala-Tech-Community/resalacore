@@ -4,4 +4,9 @@ import javax.persistence.Entity;
 
 @Entity
 public class RegionEntity extends SimpleEntityParent {
+
+    @Override
+    public void setId(Long networkTypeId) {
+
+    }
 }
