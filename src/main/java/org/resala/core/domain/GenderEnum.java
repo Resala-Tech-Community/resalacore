@@ -8,4 +8,12 @@ public enum GenderEnum {
     GenderEnum(int value) { this.value  = value; }
 
     public int getValue(){return  this.value;}
+
+    public String firstLatter() {
+        if(value==1) {
+            return "F";
+        }else {
+            return "M";
+        }
+    }
 }

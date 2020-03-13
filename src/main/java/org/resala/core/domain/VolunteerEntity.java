@@ -43,6 +43,7 @@ public class VolunteerEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String code;
     @NotEmpty(message = "Please enter Name")
     private String name;
@@ -69,4 +70,8 @@ public class VolunteerEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private RegionEntity regionEntity;
 
+
+    public String getCode() {
+        return id + code;
+    }
 }

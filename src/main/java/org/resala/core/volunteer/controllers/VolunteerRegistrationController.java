@@ -8,6 +8,8 @@ import org.resala.core.volunteer.Dto.RegistrationPostDTO;
 import org.resala.core.volunteer.mapper.VolunteerMapper;
 import org.resala.core.volunteer.services.VolunteerRegistrationService;
 import org.resala.core.volunteer.services.VolunteerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +26,7 @@ public class VolunteerRegistrationController {
 
     private final VolunteerRegistrationService volunteerRegistrationService;
     private final VolunteerService volunteerService;
-
+    @Autowired private Environment env;
     VolunteerRegistrationController(VolunteerRegistrationService vrService, VolunteerService volunteer) {
         volunteerRegistrationService = vrService;
         volunteerService = volunteer;
@@ -44,7 +46,7 @@ public class VolunteerRegistrationController {
 
 
         volunteerRegistrationService.save(parms.getBranchId(), parms.getEventId(), volunteerEntity.getId());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(volunteerEntity);
     }
 
     @PostMapping()
@@ -59,10 +61,9 @@ public class VolunteerRegistrationController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Volunteer is already exist and registration is " + isSaved);
         }
         VolunteerEntity volunteerEntity = VolunteerMapper.instance.toVolunteerEntitiy(body);
-
         volunteerService.saveData(volunteerEntity);
         volunteerRegistrationService.save(body.getBranchId(), body.getEventId(), volunteerEntity.getId());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(volunteerEntity);
     }
 
     private boolean isValidParams(RegistrationParamsDTO parms) {
@@ -75,12 +76,12 @@ public class VolunteerRegistrationController {
 
     private ResponseEntity getInvalidResponseEntity(RegistrationParamsDTO parms, VolunteerEntity volunteerEntity) {
         if (Objects.isNull(volunteerEntity)) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(env.getProperty("request.bad"));
         }
 
         boolean isRegistered = volunteerRegistrationService.isRegistered(parms.getBranchId(), parms.getEventId(), volunteerEntity.getId());
         if (isRegistered) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(env.getProperty("request.conflict"));
         }
         return null;
     }
