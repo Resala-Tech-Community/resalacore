@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.resala</groupId>
     <artifactId>core</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <name>core</name>
     <description>Resala core project</description>
 
@@ -245,7 +245,7 @@
         <url>https://github.com/Resala-Tech-Community/resalacore/tree/master/src</url>
         <connection>scm:git:https://github.com/Resala-Tech-Community/resalacore.git</connection>
         <developerConnection>scm:git:https://github.com/Resala-Tech-Community/resalacore.git</developerConnection>
-      <tag>v1.1</tag>
+      <tag>HEAD</tag>
   </scm>
 
 </project>
