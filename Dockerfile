@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-COPY ./target/core-1.0.jar core.jar
+COPY ./target/core-1.1.jar core.jar
 
 EXPOSE 8080
 
