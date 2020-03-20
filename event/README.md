@@ -1,2 +1,0 @@
-# Event
-Resala Event Service

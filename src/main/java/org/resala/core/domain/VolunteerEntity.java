@@ -2,6 +2,7 @@ package org.resala.core.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -43,7 +44,7 @@ public class VolunteerEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @Formula("id || '-' || gender || '-' || substr(name,1,2) || '-' || substr(phoneNumber,10,2)")
     private String code;
     @NotEmpty(message = "Please enter Name")
     private String name;
@@ -70,8 +71,4 @@ public class VolunteerEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private RegionEntity regionEntity;
 
-
-    public String getCode() {
-        return id + code;
-    }
 }

@@ -2,6 +2,7 @@ package org.resala.core.volunteer.controllers;
 
 import com.google.common.base.Strings;
 import org.resala.core.domain.VolunteerEntity;
+import org.resala.core.response.ErrorMessageResponse;
 import org.resala.core.utils.ValidationUtils;
 import org.resala.core.volunteer.Dto.RegistrationParamsDTO;
 import org.resala.core.volunteer.Dto.RegistrationPostDTO;
@@ -26,7 +27,9 @@ public class VolunteerRegistrationController {
 
     private final VolunteerRegistrationService volunteerRegistrationService;
     private final VolunteerService volunteerService;
-    @Autowired private Environment env;
+    @Autowired
+    private ErrorMessageResponse errorMessageResponse;
+
     VolunteerRegistrationController(VolunteerRegistrationService vrService, VolunteerService volunteer) {
         volunteerRegistrationService = vrService;
         volunteerService = volunteer;
@@ -36,7 +39,7 @@ public class VolunteerRegistrationController {
     public ResponseEntity RegisterVolunteerByCode(RegistrationParamsDTO parms) {
 
         if (isValidParam(parms)) {
-            return ResponseEntity.badRequest().build();
+            return errorMessageResponse.badRequest();
         }
         VolunteerEntity volunteerEntity = volunteerService.findByParams(parms);
         ResponseEntity invalidResponseEntity = getInvalidResponseEntity(parms, volunteerEntity);
@@ -76,12 +79,12 @@ public class VolunteerRegistrationController {
 
     private ResponseEntity getInvalidResponseEntity(RegistrationParamsDTO parms, VolunteerEntity volunteerEntity) {
         if (Objects.isNull(volunteerEntity)) {
-            return ResponseEntity.badRequest().body(env.getProperty("request.bad"));
+            return ResponseEntity.badRequest().body(errorMessageResponse.notExist());
         }
 
         boolean isRegistered = volunteerRegistrationService.isRegistered(parms.getBranchId(), parms.getEventId(), volunteerEntity.getId());
         if (isRegistered) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(env.getProperty("request.conflict"));
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessageResponse.alreadyRegistered());
         }
         return null;
     }

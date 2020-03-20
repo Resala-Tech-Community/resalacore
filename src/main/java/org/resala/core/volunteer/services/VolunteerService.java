@@ -20,7 +20,13 @@ public class VolunteerService {
     }
 
     public VolunteerEntity saveData(final VolunteerEntity volunteerEntity) {
-        volunteerRepository.save(volunteerEntity);
+        System.out.println("-----------------------" + volunteerRepository.save(volunteerEntity).getCode());
+        // volunteerRepository.save(volunteerEntity);
+        volunteerEntity.setCode(
+                volunteerEntity.getId() + "-" + volunteerEntity.getGender().getValue() + "-" +
+                        volunteerEntity.getName().substring(0, 2) + "-"+
+                        volunteerEntity.getPhoneNumber().substring(volunteerEntity.getPhoneNumber().length()-2,volunteerEntity.getPhoneNumber().length())
+        );
         return volunteerEntity;
     }
 
@@ -54,7 +60,7 @@ public class VolunteerService {
 
     public VolunteerEntity findByParams(final RegistrationParamsDTO params) {
         VolunteerEntity entity = VolunteerMapper.instance.toVolunteerEntity(params);
-        Example<VolunteerEntity> example = Example.of(entity, ExampleMatcher.matchingAny());
+        Example<VolunteerEntity> example = Example.of(entity, ExampleMatcher.matching());
         return volunteerRepository.findOne(example).orElse(null);
     }
 
@@ -75,4 +81,5 @@ public class VolunteerService {
         entity.setEMail(email);
         return Example.of(entity, ExampleMatcher.matchingAny());
     }
+
 }

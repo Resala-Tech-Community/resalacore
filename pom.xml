@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.resala</groupId>
     <artifactId>core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
     <name>core</name>
     <description>Demo project for Spring Boot</description>
 
@@ -26,7 +26,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
