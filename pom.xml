@@ -240,7 +240,7 @@
             <url>https://maven.pkg.github.com/Resala-Tech-Community/resalacore</url>
         </repository>
     </distributionManagement>
-
+<!--scm-->
     <scm>
         <url>https://github.com/Resala-Tech-Community/resalacore/tree/master/src</url>
         <connection>scm:git:https://github.com/Resala-Tech-Community/resalacore.git</connection>
