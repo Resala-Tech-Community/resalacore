@@ -10,7 +10,7 @@
     </parent>
     <groupId>org.resala</groupId>
     <artifactId>core</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.1</version>
     <name>core</name>
     <description>Resala core project</description>
 
