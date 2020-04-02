@@ -1,3 +1,4 @@
+/*
 package org.resala.core.config;
 
 import org.hibernate.MappingException;
@@ -19,4 +20,4 @@ public class SQLiteIdentityColumnSupport extends IdentityColumnSupportImpl {
     public String getIdentityColumnString(int type) throws MappingException {
         return "integer";
     }
-}
+}*/

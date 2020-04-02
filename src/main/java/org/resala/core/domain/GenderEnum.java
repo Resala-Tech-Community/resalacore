@@ -1,7 +1,7 @@
 package org.resala.core.domain;
 
 public enum GenderEnum {
-    female(1), male(2);
+    female(0), male(1);
 
     private int value;
 

@@ -1,3 +1,10 @@
+
+INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (1,'1582310942000','test event 1','09:00','10:00');
+INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (2,'1582397342000','test event 2','09:00','10:00');
+INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (3,'1582138142000','test event 3','09:00','10:00');
+INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (4,'1582051742000','test event 4','09:00','10:00');
+INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (5,'1581965342000','test event 5','09:00','10:00');
+INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (6,'1581878942000','test event 6','09:00','10:00');
 INSERT INTO `BranchEntity`(id,name) VALUES(1,'TEST Branch');
 INSERT INTO `BranchEventEntity`(branchEntity_id,eventEntity_id) VALUES(1,1);
 INSERT INTO `BranchEventEntity`(branchEntity_id,eventEntity_id) VALUES(1,2);
@@ -6,12 +13,6 @@ INSERT INTO `BranchEventEntity`(branchEntity_id,eventEntity_id) VALUES(1,4);
 INSERT INTO `BranchEventEntity`(branchEntity_id,eventEntity_id) VALUES(1,5);
 INSERT INTO `BranchEventEntity`(branchEntity_id,eventEntity_id) VALUES(1,6);
 
-INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (1,'1582310942000','test event 1','09:00','10:00');
-INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (2,'1582397342000','test event 2','09:00','10:00');
-INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (3,'1582138142000','test event 3','09:00','10:00');
-INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (4,'1582051742000','test event 4','09:00','10:00');
-INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (5,'1581965342000','test event 5','09:00','10:00');
-INSERT INTO `EventEntity` (id,eventDate,name,startTime,lastTimeToReg) VALUES (6,'1581878942000','test event 6','09:00','10:00');
 INSERT INTO `VolunteerTypeEntity` (id,name) VALUES (1,'normal');
 INSERT INTO `VolunteerTypeEntity` (id,name) VALUES (2,'supervisor');
 INSERT INTO `UniversityEntitiy` (id,name) VALUES (1,'Nile');

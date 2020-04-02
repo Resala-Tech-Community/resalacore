@@ -44,7 +44,7 @@ public class VolunteerEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Formula("id || '-' || gender || '-' || substr(name,1,2) || '-' || substr(phoneNumber,10,2)")
+    @Formula("CONCAT(id, '-', gender, '-', SUBSTRING(name,1,2), '-', SUBSTRING(phoneNumber,10,2))")
     private String code;
     @NotEmpty(message = "Please enter Name")
     private String name;
