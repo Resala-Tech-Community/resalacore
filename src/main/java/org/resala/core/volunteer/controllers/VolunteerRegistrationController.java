@@ -10,8 +10,6 @@ import org.resala.core.volunteer.mapper.VolunteerMapper;
 import org.resala.core.volunteer.services.VolunteerRegistrationService;
 import org.resala.core.volunteer.services.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,12 +54,12 @@ public class VolunteerRegistrationController {
     public ResponseEntity RegisterVolunteer(RegistrationPostDTO body) {
         Set<ConstraintViolation<RegistrationPostDTO>> violations = ValidationUtils.getConstraintViolations(body);
         if (!violations.isEmpty()) {
-            return ResponseEntity.badRequest().body(violations.stream().findFirst().get().getMessage());
+            return errorMessageResponse.getViolations(violations);
         }
         VolunteerEntity entity = volunteerService.findAny(body.getPhoneNumber(), null, body.getEMail());
         if (null != entity) {
             boolean isSaved = volunteerRegistrationService.validateAndSave(body.getBranchId(), body.getEventId(), entity.getId());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Volunteer is already exist and registration is " + isSaved);
+            return errorMessageResponse.volunteerExist(isSaved);
         }
         VolunteerEntity volunteerEntity = VolunteerMapper.instance.toVolunteerEntitiy(body);
         volunteerService.saveData(volunteerEntity);
@@ -79,12 +77,12 @@ public class VolunteerRegistrationController {
 
     private ResponseEntity getInvalidResponseEntity(RegistrationParamsDTO parms, VolunteerEntity volunteerEntity) {
         if (Objects.isNull(volunteerEntity)) {
-            return ResponseEntity.badRequest().body(errorMessageResponse.notExist());
+            return errorMessageResponse.notExist();
         }
 
         boolean isRegistered = volunteerRegistrationService.isRegistered(parms.getBranchId(), parms.getEventId(), volunteerEntity.getId());
         if (isRegistered) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessageResponse.alreadyRegistered());
+            return errorMessageResponse.alreadyRegistered();
         }
         return null;
     }

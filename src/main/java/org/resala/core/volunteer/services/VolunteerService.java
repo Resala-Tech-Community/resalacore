@@ -20,8 +20,7 @@ public class VolunteerService {
     }
 
     public VolunteerEntity saveData(final VolunteerEntity volunteerEntity) {
-        System.out.println("-----------------------" + volunteerRepository.save(volunteerEntity).getCode());
-        // volunteerRepository.save(volunteerEntity);
+        volunteerRepository.save(volunteerEntity);
         volunteerEntity.setCode(
                 volunteerEntity.getId() + "-" + volunteerEntity.getGender().getValue() + "-" +
                         volunteerEntity.getName().substring(0, 2) + "-"+
@@ -60,7 +59,7 @@ public class VolunteerService {
 
     public VolunteerEntity findByParams(final RegistrationParamsDTO params) {
         VolunteerEntity entity = VolunteerMapper.instance.toVolunteerEntity(params);
-        Example<VolunteerEntity> example = Example.of(entity, ExampleMatcher.matching());
+        Example<VolunteerEntity> example = Example.of(entity, ExampleMatcher.matchingAny());
         return volunteerRepository.findOne(example).orElse(null);
     }
 
