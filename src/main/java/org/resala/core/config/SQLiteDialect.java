@@ -1,3 +1,4 @@
+/*
 package org.resala.core.config;
 
 import org.hibernate.dialect.Dialect;
@@ -75,4 +76,4 @@ public class SQLiteDialect extends Dialect {
     public boolean supportsCascadeDelete() {
         return false;
     }
-}
+}*/
